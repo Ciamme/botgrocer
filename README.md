@@ -1,381 +1,294 @@
-# 🤖 BotGrocer - AI Agent Marketplace
+# BotGrocer - AI Agent Marketplace
 
-**The First Marketplace for AI Agents**
+首个为AI智能体设计的购物网站。
 
-[![Bun](https://img.shields.io/badge/runtime-Bun-000000.svg)](https://bun.sh)
-[![TypeScript](https://img.shields.io/badge/language-TypeScript-3178C6.svg)](https://www.typescriptlang.org/)
-[![PostgreSQL](https://img.shields.io/badge/database-PostgreSQL-336791.svg)](https://www.postgresql.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## 🚀 快速开始
 
-## 🚀 Overview
+### 环境要求
+- **Node.js**: 18+ (推荐使用Bun)
+- **Bun**: 1.0+ (推荐运行时)
+- **Git**: 版本控制
 
-BotGrocer is a production-grade marketplace platform designed specifically for AI agents. It enables intelligent agents to discover, purchase, and utilize APIs, compute resources, and digital goods autonomously.
+### 本地开发
+```bash
+# 1. 克隆项目
+git clone <repository-url>
+cd botgrocer
 
-### ✨ Key Features
+# 2. 安装依赖
+bun install
 
-- **🤖 AI-First Design**: Built from the ground up for AI agent interaction
-- **🔄 Self-Evolution**: System can evolve its own capabilities based on usage patterns
-- **🔧 MCP Integration**: Full support for Anthropic's Model Context Protocol
-- **🌐 Multi-Language UI**: Internationalization with iOS 26 HIG compliance
-- **⚡ High Performance**: Built on Bun runtime for maximum speed
-- **🔒 Production Ready**: Type-safe, secure, and scalable architecture
+# 3. 启动开发服务器
+bun run dev
 
-## 🏗️ Architecture
+# 4. 访问本地服务
+#    http://localhost:3000
+#    http://localhost:3000/health
+```
 
-### Tech Stack
+### 一键部署
+```bash
+# 部署到生产环境
+./deploy.sh prod
 
-- **Runtime**: [Bun](https://bun.sh) - Fast all-in-one JavaScript runtime
-- **Language**: [TypeScript](https://www.typescriptlang.org/) - Type safety at scale
-- **Database**: [PostgreSQL](https://www.postgresql.org/) with JSONB for flexibility
-- **ORM**: [Drizzle ORM](https://orm.drizzle.team/) - Type-safe database operations
-- **API Framework**: [Elysia.js](https://elysiajs.com/) - Fast, type-safe web framework
-- **MCP**: [Model Context Protocol](https://spec.modelcontextprotocol.io/) - AI agent tool integration
-- **UI**: Following iOS 26 Human Interface Guidelines
+# 部署到开发环境  
+./deploy.sh dev
 
-### Project Structure
+# 查看部署状态
+./deploy.sh status
+```
+
+## 📁 项目结构
 
 ```
 botgrocer/
-├── src/
-│   ├── api/              # API routes and controllers
-│   ├── config/           # Configuration management
-│   ├── db/              # Database schema and connection
-│   ├── models/          # Business logic models
-│   ├── services/        # Business services
-│   ├── utils/           # Utility functions
-│   ├── ui/              # UI components (future)
-│   └── index.ts         # Application entry point
-├── migrations/          # Database migrations
-├── scripts/            # Build and deployment scripts
-├── tests/              # Test suites
-└── public/             # Static assets
+├── src/                    # 源代码目录
+│   ├── simple.ts          # 主应用文件
+│   └── enhanced.ts        # 增强版本
+├── public/                # 静态文件
+│   └── status.html        # 状态页面
+├── scripts/               # 脚本目录
+│   ├── deploy.sh          # 自动部署脚本
+│   ├── test.sh           # 本地测试脚本
+│   ├── restart.sh        # 服务器重启脚本
+│   └── monitor.sh        # 服务器监控脚本
+├── docs/                  # 文档
+│   ├── SSL_MANAGEMENT.md # SSL证书管理
+│   └── API_DOCS.md       # API文档
+├── package.json          # 项目配置
+├── tsconfig.json        # TypeScript配置
+└── README.md            # 项目说明
 ```
 
-## 🚀 Quick Start
+## 🔧 部署脚本说明
 
-### Prerequisites
-
-- [Bun](https://bun.sh) >= 1.0.0
-- [PostgreSQL](https://www.postgresql.org/) >= 14.0
-- [Node.js](https://nodejs.org/) >= 18.0 (for some tooling)
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone git@github.com-ai:Ciamme/botgrocer.git
-   cd botgrocer
-   ```
-
-2. **Install dependencies**
-   ```bash
-   bun install
-   ```
-
-3. **Configure environment**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-4. **Set up database**
-   ```bash
-   # Create PostgreSQL database
-   createdb botgrocer
-   
-   # Run migrations
-   bun run db:generate
-   bun run scripts/migrate.ts
-   
-   # Seed with sample data
-   bun run scripts/seed.ts
-   ```
-
-5. **Start development server**
-   ```bash
-   bun run dev
-   ```
-
-6. **Access the application**
-   - API Server: http://localhost:3000
-   - API Docs: http://localhost:3000/docs
-   - MCP Server: http://localhost:3001
-
-## 📚 API Documentation
-
-### Core Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/products` | GET | List products with filtering |
-| `/api/products/:id` | GET | Get product details |
-| `/api/products/search` | POST | Advanced product search |
-| `/api/orders` | POST | Create new order |
-| `/api/orders/:id` | GET | Get order details |
-| `/api/users` | POST | Register user/agent |
-| `/api/agents/session` | POST | Create agent session |
-| `/api/mcp/tools` | GET | List available MCP tools |
-| `/health` | GET | System health check |
-
-### Agent API
-
-AI agents can interact with BotGrocer using:
-
-1. **Direct API calls** with API keys
-2. **MCP (Model Context Protocol)** for tool integration
-3. **WebSocket connections** for real-time updates
-
-Example agent request:
+### deploy.sh - 自动部署脚本
 ```bash
-curl -X GET "http://localhost:3000/api/products" \
-  -H "X-API-Key: your-agent-api-key"
+# 基本用法
+./deploy.sh [环境]
+
+# 示例
+./deploy.sh prod      # 部署到生产环境
+./deploy.sh dev       # 部署到开发环境
 ```
 
-## 🤖 MCP Integration
+**功能特性：**
+- ✅ 自动备份当前版本
+- ✅ 上传源代码和配置文件
+- ✅ 安装依赖
+- ✅ 重启服务
+- ✅ 验证部署结果
+- ✅ 显示部署状态
 
-BotGrocer provides a complete MCP server with tools for AI agents:
-
-### Available Tools
-
-1. **`search_products`** - Search marketplace products
-2. **`get_product_details`** - Get detailed product information
-3. **`create_order`** - Purchase products autonomously
-4. **`check_order_status`** - Track order fulfillment
-5. **`manage_credits`** - View and manage agent credits
-
-### Connecting to MCP
-
+### test.sh - 本地测试脚本
 ```bash
-# Start MCP server
-bun run mcp:start
-
-# Connect from Claude Desktop or other MCP clients
+# 运行本地测试
+./test.sh
 ```
 
-## 🎨 UI Design
+**测试内容：**
+- ✅ 项目结构检查
+- ✅ TypeScript编译检查
+- ✅ 本地服务器启动测试
+- ✅ API功能测试
+- ✅ 代码质量检查
+- ✅ 安全检查
 
-The user interface follows **Apple's iOS 26 Human Interface Guidelines**:
+## 🌐 服务器配置
 
-- **Colors**: Primary color `#CA279C` with dark/light mode support
-- **Typography**: SF Pro font family with HIG-compliant sizes
-- **Layout**: Responsive grid with iOS 26 soft rounded corners (r=12)
-- **Animations**: Spring-based transitions (damping: 0.7, stiffness: 300)
-- **Components**: Native iOS-style buttons, sheets, and navigation
+### 生产服务器
+- **IP地址**: 67.209.182.135
+- **SSH端口**: 22
+- **部署目录**: `/opt/botgrocer`
+- **SSH密钥**: `~/.ssh/id_ed25519`
 
-## 🗄️ Database Schema
-
-### Core Tables
-
-1. **`users`** - Human users and AI agents
-2. **`products`** - Marketplace products and services
-3. **`orders`** - Purchase transactions
-4. **`order_items`** - Individual order items
-5. **`agent_sessions`** - Active AI agent sessions
-6. **`mcp_tools`** - Available MCP tools
-7. **`evolution_logs`** - System evolution tracking
-
-### JSONB Usage
-
-Extensive use of JSONB for flexibility:
-- Product specifications
-- Agent capabilities
-- Order metadata
-- Evolution changes
-- MCP tool schemas
-
-## 🔧 Development
-
-### Commands
-
+### 服务管理
 ```bash
-# Development
-bun run dev              # Start dev server with hot reload
-bun run build            # Build for production
-bun run start            # Start production server
+# 重启应用
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "cd /opt/botgrocer && ./restart.sh"
 
-# Database
-bun run db:generate      # Generate migrations
-bun run db:migrate       # Apply migrations
-bun run db:seed          # Seed database
+# 监控状态
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "cd /opt/botgrocer && ./monitor.sh"
 
-# Testing
-bun run test             # Run tests
-bun run test:watch       # Run tests in watch mode
-
-# Code Quality
-bun run lint             # Lint code
-bun run format           # Format code
+# 查看日志
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "tail -f /var/log/botgrocer.log"
 ```
 
-### Adding New Features
+## 🔒 HTTPS配置
 
-1. **Database Changes**
-   ```bash
-   # 1. Update src/db/schema.ts
-   # 2. Generate migration
-   bun run db:generate
-   # 3. Apply migration
-   bun run scripts/migrate.ts
-   ```
+### 证书信息
+- **域名**: botgrocer.com, www.botgrocer.com
+- **颁发机构**: Let's Encrypt
+- **有效期**: 90天 (自动续订)
+- **加密协议**: TLS 1.3 + HTTP/2
 
-2. **API Endpoints**
-   - Add route in `src/api/`
-   - Define validation schemas
-   - Implement business logic
-   - Add tests
+### 访问方式
+- **主地址**: https://botgrocer.com
+- **HTTP重定向**: http://botgrocer.com → https://botgrocer.com
+- **健康检查**: https://botgrocer.com/health
+- **产品API**: https://botgrocer.com/api/products
 
-3. **MCP Tools**
-   - Add tool definition to database
-   - Implement handler in `src/mcp/`
-   - Update tool registry
+## 📡 API文档
 
-## 🚢 Deployment
-
-### Server Deployment
-
-1. **Prepare server**
-   ```bash
-   # Install Bun
-   curl -fsSL https://bun.sh/install | bash
-   
-   # Install PostgreSQL
-   sudo apt install postgresql postgresql-contrib
-   
-   # Create database
-   sudo -u postgres createdb botgrocer
-   ```
-
-2. **Deploy application**
-   ```bash
-   # Clone repository
-   git clone git@github.com-ai:Ciamme/botgrocer.git /opt/botgrocer
-   cd /opt/botgrocer
-   
-   # Install dependencies
-   bun install --production
-   
-   # Configure environment
-   cp .env.example .env
-   nano .env  # Edit configuration
-   
-   # Run migrations
-   bun run scripts/migrate.ts --seed
-   
-   # Build and start
-   bun run build
-   bun run start
-   ```
-
-3. **Set up process manager** (PM2 recommended)
-   ```bash
-   # Install PM2
-   bun add -g pm2
-   
-   # Start application
-   pm2 start "bun run start" --name botgrocer
-   
-   # Save PM2 configuration
-   pm2 save
-   pm2 startup
-   ```
-
-### Docker Deployment
-
-```dockerfile
-# Dockerfile
-FROM oven/bun:1-alpine
-
-WORKDIR /app
-
-COPY package.json bun.lockb ./
-RUN bun install --production
-
-COPY . .
-
-RUN bun run build
-
-EXPOSE 3000
-EXPOSE 3001
-
-CMD ["bun", "run", "start"]
+### 健康检查
+```http
+GET /health
+```
+**响应:**
+```json
+{
+  "status": "ok",
+  "timestamp": "2026-02-28T09:00:56.160Z",
+  "server": "67.209.182.135"
+}
 ```
 
-## 📈 Monitoring & Observability
+### 产品列表
+```http
+GET /api/products
+```
+**响应:**
+```json
+[
+  {
+    "id": 1,
+    "name": "OpenAI API",
+    "price": 99.99,
+    "category": "api"
+  },
+  {
+    "id": 2,
+    "name": "GPU Compute", 
+    "price": 4.99,
+    "category": "compute"
+  }
+]
+```
 
-### Built-in Monitoring
+### 服务器信息
+```http
+GET /api/info
+```
+**响应:**
+```json
+{
+  "name": "BotGrocer",
+  "version": "1.0.0",
+  "description": "AI Agent Marketplace",
+  "endpoints": ["/", "/health", "/api/products", "/api/info"]
+}
+```
 
-- **Health checks**: `/health` endpoint
-- **Metrics**: Prometheus metrics endpoint (future)
-- **Logging**: Structured JSON logging
-- **Error tracking**: Sentry integration (optional)
+## 🛠️ 开发工作流
 
-### Performance Optimization
+### 1. 本地开发
+```bash
+# 启动开发服务器
+bun run dev
 
-- Database connection pooling
-- Query optimization with Drizzle ORM
-- Response caching (Redis planned)
-- CDN for static assets
+# 运行测试
+./test.sh
 
-## 🤝 Contributing
+# 提交代码
+git add .
+git commit -m "功能描述"
+git push
+```
 
-We welcome contributions from both humans and AI agents!
+### 2. 部署流程
+```bash
+# 运行完整测试
+./test.sh
 
-### For Humans
+# 部署到生产环境
+./deploy.sh prod
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
+# 验证部署
+curl https://botgrocer.com/health
+```
 
-### For AI Agents
+### 3. 监控和维护
+```bash
+# 查看服务器状态
+./deploy.sh status
 
-1. Connect via MCP
-2. Use the `suggest_improvement` tool
-3. Submit evolution proposals
-4. Participate in automated testing
+# 查看应用日志
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "tail -f /var/log/botgrocer.log"
 
-### Development Guidelines
+# 重启服务
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "cd /opt/botgrocer && ./restart.sh"
+```
 
-- Follow TypeScript strict mode
-- Write comprehensive tests
-- Document all public APIs
-- Follow iOS 26 HIG for UI changes
-- Use meaningful commit messages
+## 🔍 故障排除
 
-## 📄 License
+### 常见问题
 
-MIT License - see [LICENSE](LICENSE) file for details.
+#### 1. 部署失败
+```bash
+# 检查SSH连接
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "echo '连接测试'"
 
-## 🙏 Acknowledgments
+# 检查服务器状态
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "systemctl status nginx"
+```
 
-- **Bun** team for the amazing runtime
-- **Anthropic** for the Model Context Protocol
-- **Apple** for the Human Interface Guidelines
-- **All contributors** and AI agents helping build the future
+#### 2. HTTPS证书问题
+```bash
+# 检查证书状态
+echo | openssl s_client -connect botgrocer.com:443 -servername botgrocer.com 2>/dev/null | openssl x509 -noout -dates
 
-## 🔮 Roadmap
+# 手动续订证书
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "certbot renew --force-renewal"
+```
 
-### Phase 1 (Current)
-- [x] Core marketplace functionality
-- [x] MCP server integration
-- [x] Basic AI agent support
-- [x] Database schema with JSONB
+#### 3. 应用无法启动
+```bash
+# 查看应用日志
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "tail -50 /var/log/botgrocer.log"
 
-### Phase 2 (Next)
-- [ ] Advanced UI with iOS 26 HIG
-- [ ] Real-time agent communication
-- [ ] Plugin system for extensions
-- [ ] Advanced evolution algorithms
+# 重启应用
+ssh -i ~/.ssh/id_ed25519 root@67.209.182.135 "cd /opt/botgrocer && ./restart.sh"
+```
 
-### Phase 3 (Future)
-- [ ] Multi-agent collaboration
-- [ ] Autonomous system evolution
-- [ ] Cross-platform agent support
-- [ ] Decentralized marketplace features
+## 📈 监控指标
+
+### 应用健康
+- **响应时间**: < 1秒
+- **可用性**: 99.9%
+- **错误率**: < 0.1%
+
+### 服务器资源
+- **CPU使用率**: < 80%
+- **内存使用率**: < 80%
+- **磁盘空间**: > 20%
+
+### 证书状态
+- **有效期**: > 30天
+- **续订状态**: 自动续订正常
+
+## 📝 更新日志
+
+### 2026-02-28
+- ✅ 初始版本部署完成
+- ✅ HTTPS SSL证书配置
+- ✅ 自动部署脚本创建
+- ✅ 完整监控系统设置
+- ✅ 文档和测试脚本完善
+
+## 📞 支持
+
+### 紧急问题
+1. 检查服务器状态: `./deploy.sh status`
+2. 查看应用日志: `ssh ... 'tail -f /var/log/botgrocer.log'`
+3. 重启服务: `ssh ... 'cd /opt/botgrocer && ./restart.sh'`
+
+### 常规维护
+- 每天自动检查证书续订
+- 每周检查服务器资源
+- 每月备份重要数据
 
 ---
 
-**Built with ❤️ for the AI agent community**
-
-*Questions? Issues? Join our [Moltbook community](https://www.moltbook.com/u/botgrocer) for discussions and collaboration!*
+**最后更新**: 2026-02-28  
+**维护者**: nanobot 🐈  
+**状态**: ✅ 生产环境运行正常
