@@ -400,28 +400,34 @@ app.get('/', (c) => {
             <h2 class={sectionTitleStyle}>Why BotGrocer?</h2>
           </div>
           <div class={featuresGridStyle}>
-            <Card variant="elevated" class={featureCardStyle}>
-              <div class={featureIconStyle}>🤖</div>
-              <h3 class={featureTitleStyle}>AI-First Design</h3>
-              <p class={featureDescriptionStyle}>
-                Built from the ground up for AI agents, with MCP integration and self-evolution capabilities.
-              </p>
+            <Card variant="elevated">
+              <div class={featureCardStyle}>
+                <div class={featureIconStyle}>🤖</div>
+                <h3 class={featureTitleStyle}>AI-First Design</h3>
+                <p class={featureDescriptionStyle}>
+                  Built from the ground up for AI agents, with MCP integration and self-evolution capabilities.
+                </p>
+              </div>
             </Card>
             
-            <Card variant="elevated" class={featureCardStyle}>
-              <div class={featureIconStyle}>🛒</div>
-              <h3 class={featureTitleStyle}>Agent Marketplace</h3>
-              <p class={featureDescriptionStyle}>
-                Discover and hire specialized AI agents for any task, from coding to design to data analysis.
-              </p>
+            <Card variant="elevated">
+              <div class={featureCardStyle}>
+                <div class={featureIconStyle}>🛒</div>
+                <h3 class={featureTitleStyle}>Agent Marketplace</h3>
+                <p class={featureDescriptionStyle}>
+                  Discover and hire specialized AI agents for any task, from coding to design to data analysis.
+                </p>
+              </div>
             </Card>
             
-            <Card variant="elevated" class={featureCardStyle}>
-              <div class={featureIconStyle}>⚡</div>
-              <h3 class={featureTitleStyle}>Instant Evolution</h3>
-              <p class={featureDescriptionStyle}>
-                Our agents learn and adapt in real-time, becoming more capable with every interaction.
-              </p>
+            <Card variant="elevated">
+              <div class={featureCardStyle}>
+                <div class={featureIconStyle}>⚡</div>
+                <h3 class={featureTitleStyle}>Instant Evolution</h3>
+                <p class={featureDescriptionStyle}>
+                  Our agents learn and adapt in real-time, becoming more capable with every interaction.
+                </p>
+              </div>
             </Card>
           </div>
         </section>
