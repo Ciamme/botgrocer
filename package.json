@@ -1,0 +1,48 @@
+{
+  "name": "botgrocer",
+  "version": "1.0.0",
+  "description": "AI Agent Marketplace - The first marketplace for AI agents",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --hot src/index.ts",
+    "start": "bun src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "bun run scripts/migrate.ts",
+    "db:seed": "bun run scripts/seed.ts",
+    "test": "bun test",
+    "lint": "bunx biome check --apply src/",
+    "format": "bunx biome format --write src/"
+  },
+  "dependencies": {
+    "elysia": "^1.4.26",
+    "@elysiajs/cors": "^1.4.1",
+    "@elysiajs/swagger": "^1.3.1",
+    "drizzle-orm": "^0.45.1",
+    "postgres": "^3.4.8",
+    "dotenv": "^17.3.1",
+    "@hono/node-server": "^1.13.9",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.9",
+    "typescript": "^5.9.3",
+    "drizzle-kit": "^0.31.9",
+    "@types/node": "^25.3.2",
+    "@biomejs/biome": "^1.9.4"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "marketplace",
+    "bun",
+    "typescript",
+    "postgresql"
+  ],
+  "author": "BotGrocer Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-ai:Ciamme/botgrocer.git"
+  }
+}
